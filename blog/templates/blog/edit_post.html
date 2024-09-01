@@ -68,15 +68,21 @@
             color: purple;
             text-decoration: underline;
         }
+        .container{
+        width: 70vw;
+        margin: auto;
+        }
     </style>
 </head>
 <body>
-    <h1>Edit Post</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    <a href="{% url 'list_posts' %}">Back to Post</a>
+    <article class="container">    
+        <h1>Edit Post</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+        <a href="{% url 'list_posts' %}">Back to Post</a>
+    </article>
 </body>
 </html>
