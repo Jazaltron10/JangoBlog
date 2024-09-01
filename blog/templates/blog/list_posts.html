@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post List</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: lime;
+            border-bottom: 2px solid purple;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: pink;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: purple;
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: lime;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: pink;
+            color: black;
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 10px 2px lime;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #222;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid lime;
+            border-radius: 5px;
+        }
+
+        li a {
+            color: lime;
+        }
+
+        li a:hover {
+            color: pink;
+        }
+
+        p, strong {
+            color: lime;
+        }
+
+        p > a {
+            color: pink;
+        }
+
+        p > a:hover {
+            color: purple;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        <a href="{% url 'create_post' %}">Create a New Post</a>
+    {% else %}
+        <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a></p>
+    {% endif %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <h2>{{ post.title }}</h2>
+                <p><strong>Author </strong> : {{ post.author }}</p>
+                <p>{{ post.content|slice:":200" }}...</p>
+                <p>{{ post.created_at }}</p>
+                {% if user.is_authenticated and user == post.author %}
+                    <p><a href="{% url 'edit_post' post.pk %}">Edit</a> | <a href="{% url 'delete_post' post.pk %}">Delete</a></p>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No posts available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

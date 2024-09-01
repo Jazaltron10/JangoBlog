@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: lime;
+            border-bottom: 2px solid purple;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: black;
+            padding: 20px;
+            border: 2px solid lime;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: black;
+            color: lime;
+            border: 2px solid purple;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px 2px lime;
+        }
+
+        button {
+            background-color: lime;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: pink;
+            color: black;
+        }
+
+        p > a {
+            color: pink;
+            text-decoration: none;
+        }
+
+        p > a:hover {
+            color: purple;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+</body>
+</html>
