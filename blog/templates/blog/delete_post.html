@@ -52,14 +52,20 @@
             color: purple;
             text-decoration: underline;
         }
+        .container{
+        width: 70vw;
+        margin: auto;
+        }
     </style>
 </head>
 <body>
-    <h1>Are you sure you want to delete "{{ post.title }}"?</h1>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Confirm</button>
-    </form>
-    <a href="{% url 'list_posts' %}">Cancel</a>
+    <article class="container">
+        <h1>Are you sure you want to delete "{{ post.title }}"?</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm</button>
+        </form>
+        <a href="{% url 'list_posts' %}">Cancel</a>
+    </article>
 </body>
 </html>
